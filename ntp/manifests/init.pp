@@ -43,15 +43,10 @@
 # Copyright 2017 Your name here, unless otherwise noted.
 #
 class ntp {
-  case $::operatingsystem {
-    centos, redhat: { $service_ntp = "ntpd" }
-    debian, ubuntu: { $service_ntp = "ntp" }
-    default: { fail("sistema operacional desconhecido") }
-  }
   package { 'ntp':
     ensure => installed,
   }
-  service { $service_ntp:
+  service { 'ntp':
     ensure => running,
     enable => true,
     require => Package['ntp'],
